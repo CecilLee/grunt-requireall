@@ -1,0 +1,11 @@
+<section class="hello-desc">
+  <header></header>
+  <ul class="hello-list">
+    <li>title: {{=it.title}}</li>
+    <li>price: {{=it.price}}</li>
+    <%= requireall('list.tmpl') %>
+  </ul>
+</section>
+<style>
+  <%= requireall('list.css') %>
+</style>
