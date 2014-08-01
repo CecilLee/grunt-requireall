@@ -1,7 +1,7 @@
 {
   "name": "grunt-requireall",
   "description": "no, require all!",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/takumi4ichi/grunt-requireall",
   "author": {
     "name": "takumi4ichi",
