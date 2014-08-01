@@ -3,9 +3,7 @@
 
   var ul = document.createElement('ul'),
 
-    htmlDesc = '<%= requireall('desc.html') %>',
-
-    tmplDesc = <%= requireall('desc.tmpl') %>;
+    tmplDesc = <%= requireall('desc.dot', "tmpl") %>;
 
 
   ul.innerHTML = tmplDesc({

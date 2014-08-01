@@ -11,7 +11,7 @@
 module.exports = function(grunt) {
 
   var path = require('path'),
-      regex = /<%=\s*requireall\s*\(\s*(['"])(.+?)\1\s*\)\s*%>/g,
+      regex = /<%=\s*requireall\s*\(\s*(['"])(.+?)\1\s*(?:,\s*(['"])(.+?)\3\s*)?\)\s*%>/g,
       findup = require('findup-sync'),
       minify = require('html-minifier').minify,
       minifyOption = {
@@ -81,21 +81,24 @@ module.exports = function(grunt) {
 
         var content = grunt.file.read(filepath);
 
-        return content.replace(regex, function(requireTag, _, filename){
+        return content.replace(regex, function(requireTag, _1, filename, _2, requireType){
 
           var extname, dirname, filepath, preprocessor, requireContent;
 
           extname = path.extname(filename);
           extname = extname.length ? extname.substr(1) : '';
+
+          requireType = requireType || extname;
+
           dirname = extname||'';
 
-          if(options[extname+'Dir']){
-            dirname = options[extname+'Dir'];
+          if(options[requireType+'Dir']){
+            dirname = options[requireType+'Dir'];
           }
           grunt.log.debug(dirname);
 
           filepath = findup(filename, {cwd: path.resolve(options.assetRootPath, dirname)});
-          preprocessor = options.extensions[extname];
+          preprocessor = options.extensions[requireType];
 
           if(!filepath){
             return requireTag;
